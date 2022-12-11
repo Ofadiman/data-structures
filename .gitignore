@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# Include directories
+!src/
+!src/**
+
+# Include files
+!.gitignore
+!go.mod
+!go.sum
