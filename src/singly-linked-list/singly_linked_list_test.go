@@ -5,23 +5,21 @@ import (
 	"testing"
 )
 
-func TestSinglyLinkedList(t *testing.T) {
-	t.Run("should create empty list", func(t *testing.T) {
+func TestSinglyLinkedList_Size(t *testing.T) {
+	t.Run("should return 0 if list is empty", func(t *testing.T) {
 		list := NewSinglyLinkedList()
 
-		assert.Nil(t, list.head)
-		assert.Nil(t, list.tail)
 		assert.Equal(t, list.Size(), 0)
 	})
 
-	t.Run("should create list with nodes", func(t *testing.T) {
+	t.Run("should return list size", func(t *testing.T) {
 		list := NewSinglyLinkedList(1, 2, 3)
 
-		assert.Equal(t, list.head.value, 1)
-		assert.Equal(t, list.tail.value, 3)
 		assert.Equal(t, list.Size(), 3)
 	})
+}
 
+func TestSinglyLinkedList_Head(t *testing.T) {
 	t.Run("should return nil if list is empty", func(t *testing.T) {
 		list := NewSinglyLinkedList()
 
@@ -34,6 +32,9 @@ func TestSinglyLinkedList(t *testing.T) {
 		assert.Equal(t, list.Head().value, 1)
 	})
 
+}
+
+func TestSinglyLinkedList_Tail(t *testing.T) {
 	t.Run("should return nil if list is empty", func(t *testing.T) {
 		list := NewSinglyLinkedList()
 
