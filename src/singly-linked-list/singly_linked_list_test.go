@@ -33,4 +33,16 @@ func TestSinglyLinkedList(t *testing.T) {
 
 		assert.Equal(t, list.Head().value, 1)
 	})
+
+	t.Run("should return nil if list is empty", func(t *testing.T) {
+		list := NewSinglyLinkedList()
+
+		assert.Nil(t, list.Tail())
+	})
+
+	t.Run("should return list tail", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		assert.Equal(t, list.Tail().value, 3)
+	})
 }

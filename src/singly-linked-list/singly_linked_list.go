@@ -52,3 +52,7 @@ func (r *SinglyLinkedList) Size() int {
 func (r *SinglyLinkedList) Head() *Node {
 	return r.head
 }
+
+func (r *SinglyLinkedList) Tail() *Node {
+	return r.tail
+}
