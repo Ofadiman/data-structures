@@ -44,3 +44,7 @@ func NewSinglyLinkedList(values ...int) SinglyLinkedList {
 
 	return list
 }
+
+func (r *SinglyLinkedList) Size() int {
+	return r.length
+}
