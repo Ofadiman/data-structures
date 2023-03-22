@@ -20,32 +20,28 @@ func NewNode(value int) *Node {
 }
 
 func (r *Node) Insert(node *Node) {
-	if r.Left != nil && r.Right != nil {
-		if r.Left.Value > r.Right.Value {
+	if r.Value > node.Value {
+		if r.Right == nil {
+			r.Right = node
+		} else {
 			r.Right.Insert(node)
+		}
+	} else {
+		if r.Left == nil {
+			r.Left = node
 		} else {
 			r.Left.Insert(node)
 		}
 	}
-
-	if r.Left == nil {
-		fmt.Println("inserting node at left")
-		r.Left = node
-	} else {
-		fmt.Println("inserting node at right")
-		r.Right = node
-	}
 }
 
 type Tree struct {
-	root    *Node
-	printer io.Writer
+	root *Node
 }
 
-func NewTree(printer io.Writer) *Tree {
+func NewTree() *Tree {
 	return &Tree{
-		root:    nil,
-		printer: printer,
+		root: nil,
 	}
 }
 
@@ -55,4 +51,19 @@ func (r *Tree) Insert(node *Node) {
 	} else {
 		r.root.Insert(node)
 	}
+}
+
+func (r *Tree) Print(printer io.Writer, node *Node, padding int, prefix string) {
+	if node == nil {
+		return
+	}
+
+	for i := 0; i < padding; i++ {
+		fmt.Fprint(printer, " ")
+	}
+
+	fmt.Fprintf(printer, "%v: %v\n", prefix, node.Value)
+
+	r.Print(printer, node.Left, padding+2, "Left")
+	r.Print(printer, node.Right, padding+2, "Right")
 }
