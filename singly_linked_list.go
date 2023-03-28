@@ -86,3 +86,13 @@ func (r *SinglyLinkedList) ForEachNode(callback func(node *SinglyLinkedListNode)
 func (r *SinglyLinkedList) IsEmpty() bool {
 	return r.Head() == nil
 }
+
+func (r *SinglyLinkedList) Append(node *SinglyLinkedListNode) {
+	if r.IsEmpty() {
+		r.head = node
+		r.tail = node
+	} else {
+		r.tail.next = node
+		r.tail = node
+	}
+}
