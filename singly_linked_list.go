@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func NewSinglyLinkedListNode(value int, next *SinglyLinkedListNode) *SinglyLinkedListNode {
 	return &SinglyLinkedListNode{
@@ -77,7 +80,6 @@ func (r *SinglyLinkedList) ForEachNode(callback func(node *SinglyLinkedListNode)
 			break
 		}
 
-		fmt.Printf("calling callback with node: {value: %v}\n", node.value)
 		callback(node)
 		node = node.next
 	}
@@ -105,4 +107,31 @@ func (r *SinglyLinkedList) Prepend(node *SinglyLinkedListNode) {
 		node.next = r.head
 		r.head = node
 	}
+}
+
+func (r *SinglyLinkedList) InsertAfter(value int, newNode *SinglyLinkedListNode) error {
+	if r.IsEmpty() {
+		return errors.New("list is empty")
+	}
+
+	didInsert := false
+	r.ForEachNode(func(node *SinglyLinkedListNode) {
+		if node.Value() == value {
+			didInsert = true
+
+			if node.Next() == nil {
+				r.tail = newNode
+			}
+
+			temp := node.Next()
+			node.next = newNode
+			newNode.next = temp
+		}
+	})
+
+	if didInsert == false {
+		return errors.New(fmt.Sprintf("could not find element with value %v in list", value))
+	}
+
+	return nil
 }

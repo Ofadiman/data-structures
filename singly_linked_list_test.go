@@ -154,3 +154,45 @@ func TestSinglyLinkedList_Prepend(t *testing.T) {
 		assert.Equal(t, list.Head().Next(), initialHead)
 	})
 }
+
+func TestSinglyLinkedList_InsertAfter(t *testing.T) {
+	t.Run("should return error if list is empty", func(t *testing.T) {
+		list := NewSinglyLinkedList()
+
+		node := NewSinglyLinkedListNode(1, nil)
+		err := list.InsertAfter(5, node)
+
+		assert.Error(t, err)
+	})
+
+	t.Run("should return error if node with passed value does not exist in list", func(t *testing.T) {
+		list := NewSinglyLinkedList(1)
+
+		node := NewSinglyLinkedListNode(5, nil)
+		err := list.InsertAfter(3, node)
+
+		assert.Error(t, err)
+	})
+
+	t.Run("should append node to the end of the list", func(t *testing.T) {
+		list := NewSinglyLinkedList(1)
+
+		node := NewSinglyLinkedListNode(5, nil)
+		err := list.InsertAfter(1, node)
+
+		assert.Nil(t, err)
+		assert.Equal(t, list.Tail(), node)
+		assert.Equal(t, list.Head().Next(), node)
+	})
+
+	t.Run("should insert node after selected node", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2)
+
+		node := NewSinglyLinkedListNode(5, nil)
+		err := list.InsertAfter(1, node)
+
+		assert.Nil(t, err)
+		assert.Equal(t, list.Head().Next(), node)
+		assert.Equal(t, node.Next().Value(), 2)
+	})
+}
