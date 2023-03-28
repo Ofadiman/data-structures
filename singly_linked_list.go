@@ -67,7 +67,7 @@ func (r *SinglyLinkedList) Tail() *SinglyLinkedListNode {
 }
 
 func (r *SinglyLinkedList) ForEachNode(callback func(node *SinglyLinkedListNode)) {
-	if r.Head() == nil {
+	if r.IsEmpty() {
 		return
 	}
 
@@ -81,4 +81,8 @@ func (r *SinglyLinkedList) ForEachNode(callback func(node *SinglyLinkedListNode)
 		callback(node)
 		node = node.next
 	}
+}
+
+func (r *SinglyLinkedList) IsEmpty() bool {
+	return r.Head() == nil
 }

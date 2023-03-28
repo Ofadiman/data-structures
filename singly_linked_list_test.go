@@ -94,3 +94,17 @@ func TestSinglyLinkedList_ForEachNode(t *testing.T) {
 		assert.Equal(t, elements, []int{1, 2, 3})
 	})
 }
+
+func TestSinglyLinkedList_IsEmpty(t *testing.T) {
+	t.Run("should return true if list is empty", func(t *testing.T) {
+		list := NewSinglyLinkedList()
+
+		assert.Equal(t, true, list.IsEmpty())
+	})
+
+	t.Run("should return false if list is not empty", func(t *testing.T) {
+		list := NewSinglyLinkedList(1)
+
+		assert.Equal(t, false, list.IsEmpty())
+	})
+}
