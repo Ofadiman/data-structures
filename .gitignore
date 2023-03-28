@@ -1,10 +1,9 @@
 # Ignore everything
 *
 
-# Include directories
-!*.go
-
 # Include files
+!*.go
 !.gitignore
 !go.mod
 !go.sum
+!readme.md
