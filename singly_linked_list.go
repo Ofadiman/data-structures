@@ -96,3 +96,13 @@ func (r *SinglyLinkedList) Append(node *SinglyLinkedListNode) {
 		r.tail = node
 	}
 }
+
+func (r *SinglyLinkedList) Prepend(node *SinglyLinkedListNode) {
+	if r.IsEmpty() {
+		r.head = node
+		r.tail = node
+	} else {
+		node.next = r.head
+		r.head = node
+	}
+}
