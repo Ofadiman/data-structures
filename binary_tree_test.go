@@ -1,4 +1,4 @@
-package binary_tree
+package main
 
 import (
 	"bytes"
@@ -14,7 +14,7 @@ func TestBinaryTree_Insert(t *testing.T) {
 	})
 
 	t.Run("should add root node", func(t *testing.T) {
-		root := NewNode(5)
+		root := NewBinaryTreeNode(5)
 		tree := NewTree()
 
 		tree.Insert(root)
@@ -23,9 +23,9 @@ func TestBinaryTree_Insert(t *testing.T) {
 	})
 
 	t.Run("should add root node and a few nodes", func(t *testing.T) {
-		root := NewNode(5)
-		n1 := NewNode(0)
-		n2 := NewNode(1)
+		root := NewBinaryTreeNode(5)
+		n1 := NewBinaryTreeNode(0)
+		n2 := NewBinaryTreeNode(1)
 		tree := NewTree()
 
 		tree.Insert(root)
@@ -42,12 +42,12 @@ func TestBinaryTree_ForEach(t *testing.T) {
 	t.Run("should print binary tree with nodes", func(t *testing.T) {
 		buffer := &bytes.Buffer{}
 
-		root := NewNode(10)
-		n1 := NewNode(11)
-		n2 := NewNode(9)
-		n3 := NewNode(100)
-		n4 := NewNode(99)
-		n5 := NewNode(200)
+		root := NewBinaryTreeNode(10)
+		n1 := NewBinaryTreeNode(11)
+		n2 := NewBinaryTreeNode(9)
+		n3 := NewBinaryTreeNode(100)
+		n4 := NewBinaryTreeNode(99)
+		n5 := NewBinaryTreeNode(200)
 		tree := NewTree()
 
 		tree.Insert(root)

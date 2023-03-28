@@ -1,25 +1,25 @@
-package binary_tree
+package main
 
 import (
 	"fmt"
 	"io"
 )
 
-type Node struct {
-	Left  *Node
-	Right *Node
+type BinaryTreeNode struct {
+	Left  *BinaryTreeNode
+	Right *BinaryTreeNode
 	Value int
 }
 
-func NewNode(value int) *Node {
-	return &Node{
+func NewBinaryTreeNode(value int) *BinaryTreeNode {
+	return &BinaryTreeNode{
 		Left:  nil,
 		Right: nil,
 		Value: value,
 	}
 }
 
-func (r *Node) Insert(node *Node) {
+func (r *BinaryTreeNode) Insert(node *BinaryTreeNode) {
 	if r.Value > node.Value {
 		if r.Right == nil {
 			r.Right = node
@@ -35,17 +35,17 @@ func (r *Node) Insert(node *Node) {
 	}
 }
 
-type Tree struct {
-	root *Node
+type BinaryTree struct {
+	root *BinaryTreeNode
 }
 
-func NewTree() *Tree {
-	return &Tree{
+func NewTree() *BinaryTree {
+	return &BinaryTree{
 		root: nil,
 	}
 }
 
-func (r *Tree) Insert(node *Node) {
+func (r *BinaryTree) Insert(node *BinaryTreeNode) {
 	if r.root == nil {
 		r.root = node
 	} else {
@@ -53,7 +53,7 @@ func (r *Tree) Insert(node *Node) {
 	}
 }
 
-func (r *Tree) Print(printer io.Writer, node *Node, padding int, prefix string) {
+func (r *BinaryTree) Print(printer io.Writer, node *BinaryTreeNode, padding int, prefix string) {
 	if node == nil {
 		return
 	}

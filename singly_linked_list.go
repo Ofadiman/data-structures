@@ -1,13 +1,13 @@
-package singly_linked_list
+package main
 
-type Node struct {
+type SinglyLinkedListNode struct {
 	value int
-	next  *Node
+	next  *SinglyLinkedListNode
 }
 
 type SinglyLinkedList struct {
-	head   *Node
-	tail   *Node
+	head   *SinglyLinkedListNode
+	tail   *SinglyLinkedListNode
 	length int
 }
 
@@ -21,7 +21,7 @@ func NewSinglyLinkedList(values ...int) SinglyLinkedList {
 	if len(values) > 0 {
 		for i := 0; i < len(values); i++ {
 			if i == 0 {
-				node := Node{
+				node := SinglyLinkedListNode{
 					value: values[0],
 					next:  nil,
 				}
@@ -30,7 +30,7 @@ func NewSinglyLinkedList(values ...int) SinglyLinkedList {
 				list.tail = &node
 			}
 
-			node := Node{
+			node := SinglyLinkedListNode{
 				value: values[i],
 				next:  nil,
 			}
@@ -49,10 +49,10 @@ func (r *SinglyLinkedList) Size() int {
 	return r.length
 }
 
-func (r *SinglyLinkedList) Head() *Node {
+func (r *SinglyLinkedList) Head() *SinglyLinkedListNode {
 	return r.head
 }
 
-func (r *SinglyLinkedList) Tail() *Node {
+func (r *SinglyLinkedList) Tail() *SinglyLinkedListNode {
 	return r.tail
 }

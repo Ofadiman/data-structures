@@ -2,8 +2,7 @@
 *
 
 # Include directories
-!src/
-!src/**
+!*.go
 
 # Include files
 !.gitignore
