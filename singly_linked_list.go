@@ -135,3 +135,43 @@ func (r *SinglyLinkedList) InsertAfter(value int, newNode *SinglyLinkedListNode)
 
 	return nil
 }
+
+func (r *SinglyLinkedList) InsertBefore(value int, newNode *SinglyLinkedListNode) error {
+	if r.IsEmpty() {
+		return errors.New("list is empty")
+	}
+
+	didInsert := false
+	var current *SinglyLinkedListNode
+	var prev *SinglyLinkedListNode
+
+	for i := 0; i < r.length; i++ {
+		if current == nil && prev == nil {
+			current = r.Head()
+		} else {
+			prev = current
+			current = current.Next()
+		}
+
+		if didInsert == true {
+			break
+		}
+
+		if i == 0 && current.Value() == value {
+			didInsert = true
+			r.head = newNode
+			newNode.next = current
+		}
+		if i != 0 && current.Value() == value {
+			didInsert = true
+			newNode.next = current
+			prev.next = newNode
+		}
+	}
+
+	if didInsert == false {
+		return errors.New(fmt.Sprintf("could not find node with %v value in the list", value))
+	}
+
+	return nil
+}
