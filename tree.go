@@ -29,7 +29,7 @@ func NewTree(root *TreeNode) *Tree {
 	}
 }
 
-func (t *Tree) FindNodeByID(nodeID string) (*TreeNode, error) {
+func (r *Tree) FindNodeByID(nodeID string) (*TreeNode, error) {
 	id, err := uuid.Parse(nodeID)
 	if err != nil {
 		return nil, errors.New("invalid node ID")
@@ -55,5 +55,16 @@ func (t *Tree) FindNodeByID(nodeID string) (*TreeNode, error) {
 		return nil, errors.New("node not found")
 	}
 
-	return search(t.root)
+	return search(r.root)
+}
+
+func (r *Tree) Insert(parentID string, child *TreeNode) error {
+	parent, err := r.FindNodeByID(parentID)
+	if err != nil {
+		return err
+	}
+
+	parent.children = append(parent.children, child)
+
+	return nil
 }

@@ -57,3 +57,26 @@ func TestTree_FindNodeByID(t *testing.T) {
 		assert.Nil(t, err)
 	})
 }
+
+func TestTree_Insert(t *testing.T) {
+	t.Run("should return error when node with passed id does not exist", func(t *testing.T) {
+		root := NewTreeNode(5)
+		child := NewTreeNode(10)
+		tree := NewTree(root)
+
+		err := tree.Insert("d4363b15-b700-4ed0-94a2-9b12ac28ae46", child)
+
+		assert.Error(t, err)
+	})
+
+	t.Run("should insert node when node with passed id exists", func(t *testing.T) {
+		root := NewTreeNode(5)
+		child := NewTreeNode(10)
+		tree := NewTree(root)
+
+		err := tree.Insert(root.id.String(), child)
+
+		assert.Nil(t, err)
+		assert.Equal(t, []*TreeNode{child}, root.children)
+	})
+}
