@@ -24,3 +24,11 @@ func (r *Stack[T]) Pop() (*T, error) {
 
 	return item, nil
 }
+
+func (r *Stack[T]) Peek() (*T, error) {
+	if len(r.items) == 0 {
+		return nil, fmt.Errorf("stack is empty")
+	}
+
+	return r.items[len(r.items)-1], nil
+}
