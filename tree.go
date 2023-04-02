@@ -94,3 +94,19 @@ func (r *Tree) Delete(nodeID string) error {
 
 	return nil
 }
+
+func (r *Tree) ForEachNodeDepthFirst(callback func(node *TreeNode)) {
+	r.depthFirstTraversal(r.root, callback)
+}
+
+func (r *Tree) depthFirstTraversal(node *TreeNode, callback func(node *TreeNode)) {
+	if node == nil {
+		return
+	}
+
+	callback(node)
+
+	for _, child := range node.children {
+		r.depthFirstTraversal(child, callback)
+	}
+}

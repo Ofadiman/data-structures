@@ -113,3 +113,49 @@ func TestTree_Delete(t *testing.T) {
 		assert.Equal(t, []*TreeNode{}, root.children)
 	})
 }
+
+func TestTree_ForEachNodeDepthFirst(t *testing.T) {
+	t.Run("should call callback for each node in depth-first order", func(t *testing.T) {
+		root := NewTreeNode(1, nil)
+		child1 := NewTreeNode(2, root)
+		child2 := NewTreeNode(3, root)
+		child3 := NewTreeNode(4, child1)
+
+		root.children = append(root.children, child1, child2)
+		child1.children = append(child1.children, child3)
+
+		tree := NewTree(root)
+
+		var visited []*TreeNode
+		tree.ForEachNodeDepthFirst(func(node *TreeNode) {
+			visited = append(visited, node)
+		})
+
+		expected := []*TreeNode{root, child1, child3, child2}
+		assert.Equal(t, expected, visited)
+	})
+
+	t.Run("should not call callback for an empty tree", func(t *testing.T) {
+		tree := NewTree(nil)
+
+		var visited []*TreeNode
+		tree.ForEachNodeDepthFirst(func(node *TreeNode) {
+			visited = append(visited, node)
+		})
+
+		assert.Empty(t, visited)
+	})
+
+	t.Run("should call callback only for the root node when the tree has only one node", func(t *testing.T) {
+		root := NewTreeNode(1, nil)
+		tree := NewTree(root)
+
+		var visited []*TreeNode
+		tree.ForEachNodeDepthFirst(func(node *TreeNode) {
+			visited = append(visited, node)
+		})
+
+		expected := []*TreeNode{root}
+		assert.Equal(t, expected, visited)
+	})
+}
