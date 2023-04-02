@@ -2,18 +2,21 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"github.com/google/uuid"
 )
 
 type TreeNode struct {
 	id       uuid.UUID
+	parent   *TreeNode
 	value    int
 	children []*TreeNode
 }
 
-func NewTreeNode(value int) *TreeNode {
+func NewTreeNode(value int, parent *TreeNode) *TreeNode {
 	return &TreeNode{
 		id:       uuid.New(),
+		parent:   parent,
 		value:    value,
 		children: []*TreeNode{},
 	}
@@ -65,6 +68,29 @@ func (r *Tree) Insert(parentID string, child *TreeNode) error {
 	}
 
 	parent.children = append(parent.children, child)
+
+	return nil
+}
+
+func (r *Tree) Delete(nodeID string) error {
+	node, err := r.FindNodeByID(nodeID)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("found node %#v\n", node)
+
+	isRoot := node.parent == nil
+	if isRoot {
+		r.root = nil
+		return nil
+	}
+
+	for i, child := range node.parent.children {
+		if child.id.String() == nodeID {
+			node.parent.children = append(node.parent.children[:i], node.parent.children[i+1:]...)
+			break
+		}
+	}
 
 	return nil
 }
