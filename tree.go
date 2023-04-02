@@ -1,6 +1,9 @@
 package main
 
-import "github.com/google/uuid"
+import (
+	"errors"
+	"github.com/google/uuid"
+)
 
 type TreeNode struct {
 	id       uuid.UUID
@@ -24,4 +27,33 @@ func NewTree(root *TreeNode) *Tree {
 	return &Tree{
 		root: root,
 	}
+}
+
+func (t *Tree) FindNodeByID(nodeID string) (*TreeNode, error) {
+	id, err := uuid.Parse(nodeID)
+	if err != nil {
+		return nil, errors.New("invalid node ID")
+	}
+
+	var search func(node *TreeNode) (*TreeNode, error)
+	search = func(node *TreeNode) (*TreeNode, error) {
+		if node == nil {
+			return nil, errors.New("node not found")
+		}
+
+		if node.id == id {
+			return node, nil
+		}
+
+		for _, child := range node.children {
+			foundNode, err := search(child)
+			if err == nil {
+				return foundNode, nil
+			}
+		}
+
+		return nil, errors.New("node not found")
+	}
+
+	return search(t.root)
 }
