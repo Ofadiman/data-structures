@@ -136,3 +136,49 @@ func TestStack_Size(t *testing.T) {
 		assert.Equal(t, 1, size)
 	})
 }
+
+func TestStack_Empty(t *testing.T) {
+	t.Run("should do nothing when stack is already empty", func(t *testing.T) {
+		stack := NewStack[int]()
+
+		size := stack.Size()
+		top, err := stack.Peek()
+
+		assert.Equal(t, 0, size)
+		assert.Nil(t, top)
+		assert.Error(t, err)
+
+		stack.Empty()
+
+		size = stack.Size()
+		top, err = stack.Peek()
+
+		assert.Equal(t, 0, size)
+		assert.Nil(t, top)
+		assert.Error(t, err)
+	})
+
+	t.Run("should empty stack", func(t *testing.T) {
+		stack := NewStack[int]()
+
+		stack.Push(5)
+		stack.Push(10)
+		stack.Push(15)
+
+		size := stack.Size()
+		top, err := stack.Peek()
+
+		assert.Equal(t, 3, size)
+		assert.Equal(t, 15, *top)
+		assert.Nil(t, err)
+
+		stack.Empty()
+
+		size = stack.Size()
+		top, err = stack.Peek()
+
+		assert.Equal(t, 0, size)
+		assert.Nil(t, top)
+		assert.Error(t, err)
+	})
+}

@@ -40,3 +40,12 @@ func (r *Stack[T]) IsEmpty() bool {
 func (r *Stack[T]) Size() int {
 	return len(r.items)
 }
+
+func (r *Stack[T]) Empty() {
+	if len(r.items) == 0 {
+		return
+	}
+
+	var emptyItems []*T
+	r.items = emptyItems
+}
