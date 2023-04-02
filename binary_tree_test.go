@@ -8,14 +8,14 @@ import (
 
 func TestBinaryTree_Insert(t *testing.T) {
 	t.Run("should initialize empty binary tree", func(t *testing.T) {
-		tree := NewTree()
+		tree := NewBinaryTree()
 
 		assert.Nil(t, tree.root)
 	})
 
 	t.Run("should add root node", func(t *testing.T) {
 		root := NewBinaryTreeNode(5)
-		tree := NewTree()
+		tree := NewBinaryTree()
 
 		tree.Insert(root)
 
@@ -26,7 +26,7 @@ func TestBinaryTree_Insert(t *testing.T) {
 		root := NewBinaryTreeNode(5)
 		n1 := NewBinaryTreeNode(0)
 		n2 := NewBinaryTreeNode(1)
-		tree := NewTree()
+		tree := NewBinaryTree()
 
 		tree.Insert(root)
 		tree.Insert(n1)
@@ -48,7 +48,7 @@ func TestBinaryTree_ForEach(t *testing.T) {
 		n3 := NewBinaryTreeNode(100)
 		n4 := NewBinaryTreeNode(99)
 		n5 := NewBinaryTreeNode(200)
-		tree := NewTree()
+		tree := NewBinaryTree()
 
 		tree.Insert(root)
 		tree.Insert(n1)

@@ -39,7 +39,7 @@ type BinaryTree struct {
 	root *BinaryTreeNode
 }
 
-func NewTree() *BinaryTree {
+func NewBinaryTree() *BinaryTree {
 	return &BinaryTree{
 		root: nil,
 	}
