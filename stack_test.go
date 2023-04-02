@@ -116,3 +116,23 @@ func TestStack_IsEmpty(t *testing.T) {
 		assert.False(t, isEmpty)
 	})
 }
+
+func TestStack_Size(t *testing.T) {
+	t.Run("should return stack size when stack is empty", func(t *testing.T) {
+		stack := NewStack[int]()
+
+		size := stack.Size()
+
+		assert.Equal(t, 0, size)
+	})
+
+	t.Run("should return stack size when stack has elements", func(t *testing.T) {
+		stack := NewStack[int]()
+
+		stack.Push(5)
+
+		size := stack.Size()
+
+		assert.Equal(t, 1, size)
+	})
+}

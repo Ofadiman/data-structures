@@ -36,3 +36,7 @@ func (r *Stack[T]) Peek() (*T, error) {
 func (r *Stack[T]) IsEmpty() bool {
 	return len(r.items) == 0
 }
+
+func (r *Stack[T]) Size() int {
+	return len(r.items)
+}
