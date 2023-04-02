@@ -89,3 +89,30 @@ func TestStack_Peek(t *testing.T) {
 		assert.Nil(t, err)
 	})
 }
+
+func TestStack_IsEmpty(t *testing.T) {
+	t.Run("should return true when stack is empty", func(t *testing.T) {
+		stack := NewStack[int]()
+
+		isEmpty := stack.IsEmpty()
+
+		assert.True(t, isEmpty)
+	})
+
+	t.Run("should return false when stack is not empty", func(t *testing.T) {
+		stack := NewStack[int]()
+
+		stack.Push(5)
+
+		size := len(stack.items)
+		top, err := stack.Peek()
+
+		assert.Equal(t, 1, size)
+		assert.Equal(t, 5, *top)
+		assert.Nil(t, err)
+
+		isEmpty := stack.IsEmpty()
+
+		assert.False(t, isEmpty)
+	})
+}
