@@ -110,3 +110,22 @@ func (r *Tree) depthFirstTraversal(node *TreeNode, callback func(node *TreeNode)
 		r.depthFirstTraversal(child, callback)
 	}
 }
+
+func (r *Tree) ForEachNodeBreadthFirst(callback func(node *TreeNode)) {
+	if r.root == nil {
+		return
+	}
+
+	queue := []*TreeNode{r.root}
+
+	for len(queue) > 0 {
+		currentNode := queue[0]
+		queue = queue[1:]
+
+		callback(currentNode)
+
+		for _, child := range currentNode.children {
+			queue = append(queue, child)
+		}
+	}
+}
