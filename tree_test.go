@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -20,7 +21,7 @@ func TestNewTree(t *testing.T) {
 		root := NewTreeNode(5, nil)
 		tree := NewTree(root)
 
-		assert.Equal(t, root, tree.root)
+		assert.Equal(t, root, tree.Root)
 	})
 }
 
@@ -98,7 +99,7 @@ func TestTree_Delete(t *testing.T) {
 		err := tree.Delete(root.ID.String())
 
 		assert.Nil(t, err)
-		assert.Nil(t, tree.root)
+		assert.Nil(t, tree.Root)
 	})
 
 	t.Run("should delete regular node by id", func(t *testing.T) {
@@ -243,5 +244,55 @@ func TestTree_Serialize(t *testing.T) {
 		expected := `{"id":"` + root.ID.String() + `","value":1,"children":[{"id":"` + child1.ID.String() + `","value":2,"children":[{"id":"` + child3.ID.String() + `","value":4}]},{"id":"` + child2.ID.String() + `","value":3}]}`
 		assert.Nil(t, err)
 		assert.Equal(t, expected, serialized)
+	})
+}
+
+func TestTree_Deserialize(t *testing.T) {
+	t.Run("should return an error when deserializing into a nil tree", func(t *testing.T) {
+		var tree *Tree
+
+		err := tree.Deserialize(`{"id":"` + uuid.New().String() + `","value":1}`)
+
+		assert.Error(t, err)
+	})
+
+	t.Run("should deserialize an empty tree", func(t *testing.T) {
+		tree := NewTree(nil)
+
+		err := tree.Deserialize("null")
+
+		assert.Nil(t, err)
+		assert.Nil(t, tree.Root)
+	})
+
+	t.Run("should deserialize a tree with only a root node", func(t *testing.T) {
+		tree := NewTree(nil)
+
+		data := `{"id":"` + uuid.New().String() + `","value":1}`
+		err := tree.Deserialize(data)
+
+		assert.Nil(t, err)
+		assert.NotNil(t, tree.Root)
+		assert.Equal(t, 1, tree.Root.Value)
+	})
+
+	t.Run("should deserialize a tree with multiple nodes", func(t *testing.T) {
+		tree := NewTree(nil)
+
+		data := `{"id":"` + uuid.New().String() + `","value":1,"children":[{"id":"` + uuid.New().String() + `","value":2,"children":[{"id":"` + uuid.New().String() + `","value":4}]},{"id":"` + uuid.New().String() + `","value":3}]}`
+		err := tree.Deserialize(data)
+
+		assert.Nil(t, err)
+
+		root := tree.Root
+		child1 := root.Children[0]
+		child2 := root.Children[1]
+		child3 := child1.Children[0]
+
+		assert.NotNil(t, root)
+		assert.Equal(t, 1, root.Value)
+		assert.Equal(t, 2, child1.Value)
+		assert.Equal(t, 3, child2.Value)
+		assert.Equal(t, 4, child3.Value)
 	})
 }

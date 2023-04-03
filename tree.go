@@ -24,12 +24,12 @@ func NewTreeNode(value int, parent *TreeNode) *TreeNode {
 }
 
 type Tree struct {
-	root *TreeNode
+	Root *TreeNode
 }
 
 func NewTree(root *TreeNode) *Tree {
 	return &Tree{
-		root: root,
+		Root: root,
 	}
 }
 
@@ -59,7 +59,7 @@ func (r *Tree) FindNodeByID(nodeID string) (*TreeNode, error) {
 		return nil, errors.New("node not found")
 	}
 
-	return search(r.root)
+	return search(r.Root)
 }
 
 func (r *Tree) Insert(parentID string, child *TreeNode) error {
@@ -82,7 +82,7 @@ func (r *Tree) Delete(nodeID string) error {
 
 	isRoot := node.Parent == nil
 	if isRoot {
-		r.root = nil
+		r.Root = nil
 		return nil
 	}
 
@@ -97,7 +97,7 @@ func (r *Tree) Delete(nodeID string) error {
 }
 
 func (r *Tree) ForEachNodeDepthFirst(callback func(node *TreeNode)) {
-	r.depthFirstTraversal(r.root, callback)
+	r.depthFirstTraversal(r.Root, callback)
 }
 
 func (r *Tree) depthFirstTraversal(node *TreeNode, callback func(node *TreeNode)) {
@@ -113,11 +113,11 @@ func (r *Tree) depthFirstTraversal(node *TreeNode, callback func(node *TreeNode)
 }
 
 func (r *Tree) ForEachNodeBreadthFirst(callback func(node *TreeNode)) {
-	if r.root == nil {
+	if r.Root == nil {
 		return
 	}
 
-	queue := []*TreeNode{r.root}
+	queue := []*TreeNode{r.Root}
 
 	for len(queue) > 0 {
 		currentNode := queue[0]
@@ -132,9 +132,41 @@ func (r *Tree) ForEachNodeBreadthFirst(callback func(node *TreeNode)) {
 }
 
 func (r *Tree) Serialize() (string, error) {
-	data, err := json.Marshal(r.root)
+	data, err := json.Marshal(r.Root)
 	if err != nil {
 		return "", err
 	}
 	return string(data), nil
+}
+
+func (r *Tree) Deserialize(data string) error {
+	if r == nil {
+		return errors.New("cannot deserialize into a nil tree")
+	}
+
+	if data == "null" {
+		r.Root = nil
+		return nil
+	}
+
+	var root TreeNode
+	err := json.Unmarshal([]byte(data), &root)
+	if err != nil {
+		return err
+	}
+
+	queue := []*TreeNode{&root}
+	for len(queue) > 0 {
+		node := queue[0]
+		queue = queue[1:]
+
+		for _, child := range node.Children {
+			child.Parent = node
+			queue = append(queue, child)
+		}
+	}
+
+	r.Root = &root
+
+	return nil
 }
