@@ -9,9 +9,9 @@ func TestNewTreeNode(t *testing.T) {
 	t.Run("should create node", func(t *testing.T) {
 		node := NewTreeNode(5, nil)
 
-		assert.Equal(t, 5, node.value)
-		assert.Empty(t, node.children)
-		assert.IsType(t, "string", node.id.String())
+		assert.Equal(t, 5, node.Value)
+		assert.Empty(t, node.Children)
+		assert.IsType(t, "string", node.ID.String())
 	})
 }
 
@@ -39,7 +39,7 @@ func TestTree_FindNodeByID(t *testing.T) {
 		root := NewTreeNode(5, nil)
 		tree := NewTree(root)
 
-		node, err := tree.FindNodeByID(root.id.String())
+		node, err := tree.FindNodeByID(root.ID.String())
 
 		assert.Equal(t, root, node)
 		assert.Nil(t, err)
@@ -48,10 +48,10 @@ func TestTree_FindNodeByID(t *testing.T) {
 	t.Run("should return node when node with passed id exists", func(t *testing.T) {
 		root := NewTreeNode(5, nil)
 		child := NewTreeNode(10, root)
-		root.children = append(root.children, child)
+		root.Children = append(root.Children, child)
 		tree := NewTree(root)
 
-		node, err := tree.FindNodeByID(child.id.String())
+		node, err := tree.FindNodeByID(child.ID.String())
 
 		assert.Equal(t, child, node)
 		assert.Nil(t, err)
@@ -74,10 +74,10 @@ func TestTree_Insert(t *testing.T) {
 		child := NewTreeNode(10, root)
 		tree := NewTree(root)
 
-		err := tree.Insert(root.id.String(), child)
+		err := tree.Insert(root.ID.String(), child)
 
 		assert.Nil(t, err)
-		assert.Equal(t, []*TreeNode{child}, root.children)
+		assert.Equal(t, []*TreeNode{child}, root.Children)
 	})
 }
 
@@ -95,7 +95,7 @@ func TestTree_Delete(t *testing.T) {
 		root := NewTreeNode(5, nil)
 		tree := NewTree(root)
 
-		err := tree.Delete(root.id.String())
+		err := tree.Delete(root.ID.String())
 
 		assert.Nil(t, err)
 		assert.Nil(t, tree.root)
@@ -104,13 +104,13 @@ func TestTree_Delete(t *testing.T) {
 	t.Run("should delete regular node by id", func(t *testing.T) {
 		root := NewTreeNode(5, nil)
 		child := NewTreeNode(10, root)
-		root.children = append(root.children, child)
+		root.Children = append(root.Children, child)
 		tree := NewTree(root)
 
-		err := tree.Delete(child.id.String())
+		err := tree.Delete(child.ID.String())
 
 		assert.Nil(t, err)
-		assert.Equal(t, []*TreeNode{}, root.children)
+		assert.Equal(t, []*TreeNode{}, root.Children)
 	})
 }
 
@@ -121,8 +121,8 @@ func TestTree_ForEachNodeDepthFirst(t *testing.T) {
 		child2 := NewTreeNode(3, root)
 		child3 := NewTreeNode(4, child1)
 
-		root.children = append(root.children, child1, child2)
-		child1.children = append(child1.children, child3)
+		root.Children = append(root.Children, child1, child2)
+		child1.Children = append(child1.Children, child3)
 
 		tree := NewTree(root)
 
@@ -167,8 +167,8 @@ func TestTree_ForEachNodeBreadthFirst(t *testing.T) {
 		child2 := NewTreeNode(3, root)
 		child3 := NewTreeNode(4, child1)
 
-		root.children = append(root.children, child1, child2)
-		child1.children = append(child1.children, child3)
+		root.Children = append(root.Children, child1, child2)
+		child1.Children = append(child1.Children, child3)
 
 		tree := NewTree(root)
 
@@ -203,5 +203,45 @@ func TestTree_ForEachNodeBreadthFirst(t *testing.T) {
 
 		expected := []*TreeNode{root}
 		assert.Equal(t, expected, visited)
+	})
+}
+
+func TestTree_Serialize(t *testing.T) {
+	t.Run("should serialize an empty tree", func(t *testing.T) {
+		tree := NewTree(nil)
+
+		serialized, err := tree.Serialize()
+
+		assert.Nil(t, err)
+		assert.Equal(t, "null", serialized)
+	})
+
+	t.Run("should serialize a tree with only a root node", func(t *testing.T) {
+		root := NewTreeNode(1, nil)
+		tree := NewTree(root)
+
+		serialized, err := tree.Serialize()
+
+		expected := `{"id":"` + root.ID.String() + `","value":1}`
+		assert.Nil(t, err)
+		assert.Equal(t, expected, serialized)
+	})
+
+	t.Run("should serialize a tree with multiple nodes", func(t *testing.T) {
+		root := NewTreeNode(1, nil)
+		child1 := NewTreeNode(2, root)
+		child2 := NewTreeNode(3, root)
+		child3 := NewTreeNode(4, child1)
+
+		root.Children = append(root.Children, child1, child2)
+		child1.Children = append(child1.Children, child3)
+
+		tree := NewTree(root)
+
+		serialized, err := tree.Serialize()
+
+		expected := `{"id":"` + root.ID.String() + `","value":1,"children":[{"id":"` + child1.ID.String() + `","value":2,"children":[{"id":"` + child3.ID.String() + `","value":4}]},{"id":"` + child2.ID.String() + `","value":3}]}`
+		assert.Nil(t, err)
+		assert.Equal(t, expected, serialized)
 	})
 }
