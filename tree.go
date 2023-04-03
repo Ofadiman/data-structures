@@ -170,3 +170,27 @@ func (r *Tree) Deserialize(data string) error {
 
 	return nil
 }
+
+func (r *Tree) Height() int {
+	if r == nil || r.Root == nil {
+		return 0
+	}
+
+	return height(r.Root) - 1
+}
+
+func height(node *TreeNode) int {
+	if node == nil {
+		return 0
+	}
+
+	maxHeight := 0
+	for _, child := range node.Children {
+		childHeight := height(child)
+		if childHeight > maxHeight {
+			maxHeight = childHeight
+		}
+	}
+
+	return maxHeight + 1
+}

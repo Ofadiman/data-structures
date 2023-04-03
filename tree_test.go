@@ -296,3 +296,52 @@ func TestTree_Deserialize(t *testing.T) {
 		assert.Equal(t, 4, child3.Value)
 	})
 }
+
+func TestTree_Height(t *testing.T) {
+	t.Run("should return 0 for empty tree", func(t *testing.T) {
+		tree := NewTree(nil)
+
+		assert.Equal(t, 0, tree.Height())
+	})
+
+	t.Run("should return 0 for tree with only root", func(t *testing.T) {
+		root := NewTreeNode(1, nil)
+		tree := NewTree(root)
+
+		assert.Equal(t, 0, tree.Height())
+	})
+
+	t.Run("should return height for balanced tree", func(t *testing.T) {
+		root := NewTreeNode(1, nil)
+		child1 := NewTreeNode(2, root)
+		child2 := NewTreeNode(3, root)
+		root.Children = append(root.Children, child1, child2)
+
+		child1_1 := NewTreeNode(4, child1)
+		child1.Children = append(child1.Children, child1_1)
+
+		child2_1 := NewTreeNode(5, child2)
+		child2.Children = append(child2.Children, child2_1)
+
+		tree := NewTree(root)
+
+		assert.Equal(t, 2, tree.Height())
+	})
+
+	t.Run("should return height for unbalanced tree", func(t *testing.T) {
+		root := NewTreeNode(1, nil)
+		child1 := NewTreeNode(2, root)
+		child2 := NewTreeNode(3, root)
+		root.Children = append(root.Children, child1, child2)
+
+		child1_1 := NewTreeNode(4, child1)
+		child1.Children = append(child1.Children, child1_1)
+
+		child1_1_1 := NewTreeNode(6, child1_1)
+		child1_1.Children = append(child1_1.Children, child1_1_1)
+
+		tree := NewTree(root)
+
+		assert.Equal(t, 3, tree.Height())
+	})
+}
