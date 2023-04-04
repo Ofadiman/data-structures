@@ -158,3 +158,60 @@ func TestSinglyLinkedList_Remove(t *testing.T) {
 		assert.Equal(t, 3, list.Head.Next.Next.Value)
 	})
 }
+
+func TestSinglyLinkedList_RemoveAt(t *testing.T) {
+	t.Run("should return an error when the list is empty", func(t *testing.T) {
+		list := NewSinglyLinkedList()
+
+		err := list.RemoveAt(0)
+
+		assert.Error(t, err)
+	})
+
+	t.Run("should return an error when the index is negative", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		err := list.RemoveAt(-1)
+
+		assert.Error(t, err)
+	})
+
+	t.Run("should remove the head when the index is 0", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		err := list.RemoveAt(0)
+
+		assert.Nil(t, err)
+		assert.Equal(t, 2, list.Head.Value)
+		assert.Equal(t, 3, list.Head.Next.Value)
+	})
+
+	t.Run("should remove a middle node when the index is valid", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		err := list.RemoveAt(1)
+
+		assert.Nil(t, err)
+		assert.Equal(t, 1, list.Head.Value)
+		assert.Equal(t, 3, list.Head.Next.Value)
+	})
+
+	t.Run("should remove the tail when the index is valid", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		err := list.RemoveAt(2)
+
+		assert.Nil(t, err)
+		assert.Equal(t, 1, list.Head.Value)
+		assert.Equal(t, 2, list.Head.Next.Value)
+		assert.Nil(t, list.Head.Next.Next)
+	})
+
+	t.Run("should return an error when the index is greater than the list length", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		err := list.RemoveAt(3)
+
+		assert.Error(t, err)
+	})
+}

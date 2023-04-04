@@ -23,6 +23,7 @@ null), marking the end of the list. The following methods are supported:
 - `Prepend`: Add a new node to the beginning of the list.
 - `Insert`: Insert a new node at a specific position in the list.
 - `Remove`: Remove a node with a specific value from the list.
+- `RemoveAt`: Remove a node at a specific position in the list.
 
 Here are some real-world use cases of Singly Linked Lists:
 

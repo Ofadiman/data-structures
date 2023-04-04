@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 type SinglyLinkedListNode struct {
 	Value int
 	Next  *SinglyLinkedListNode
@@ -93,4 +95,33 @@ func (r *SinglyLinkedList) Remove(value int) {
 		}
 		current = current.Next
 	}
+}
+
+func (r *SinglyLinkedList) RemoveAt(index int) error {
+	if r.Head == nil || index < 0 {
+		return errors.New("invalid index")
+	}
+
+	if index == 0 {
+		r.Head = r.Head.Next
+		if r.Head == nil {
+			r.Tail = nil
+		}
+		return nil
+	}
+
+	current := r.Head
+	for i := 1; i < index && current.Next != nil; i++ {
+		current = current.Next
+	}
+
+	if current.Next == nil {
+		return errors.New("invalid index")
+	}
+
+	current.Next = current.Next.Next
+	if current.Next == nil {
+		r.Tail = current
+	}
+	return nil
 }
