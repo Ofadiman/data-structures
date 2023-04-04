@@ -149,3 +149,18 @@ func (r *SinglyLinkedList) IndexOf(value int) int {
 	}
 	return -1
 }
+
+func (r *SinglyLinkedList) Reverse() {
+	var prev, current, next *SinglyLinkedListNode
+	current = r.Head
+	r.Tail = current
+
+	for current != nil {
+		next = current.Next
+		current.Next = prev
+		prev = current
+		current = next
+	}
+
+	r.Head = prev
+}

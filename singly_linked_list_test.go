@@ -302,3 +302,36 @@ func TestSinglyLinkedList_IndexOf(t *testing.T) {
 		assert.Equal(t, -1, index)
 	})
 }
+
+func TestSinglyLinkedList_Reverse(t *testing.T) {
+	t.Run("should reverse an empty list", func(t *testing.T) {
+		list := NewSinglyLinkedList()
+
+		list.Reverse()
+
+		assert.Nil(t, list.Head)
+		assert.Nil(t, list.Tail)
+	})
+
+	t.Run("should reverse a list with a single node", func(t *testing.T) {
+		list := NewSinglyLinkedList(1)
+
+		list.Reverse()
+
+		assert.Equal(t, 1, list.Head.Value)
+		assert.Equal(t, 1, list.Tail.Value)
+		assert.Nil(t, list.Head.Next)
+	})
+
+	t.Run("should reverse a list with multiple nodes", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		list.Reverse()
+
+		assert.Equal(t, 3, list.Head.Value)
+		assert.Equal(t, 1, list.Tail.Value)
+		assert.Equal(t, 2, list.Head.Next.Value)
+		assert.Equal(t, 1, list.Head.Next.Next.Value)
+		assert.Nil(t, list.Head.Next.Next.Next)
+	})
+}
