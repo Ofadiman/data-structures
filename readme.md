@@ -58,6 +58,7 @@ added, and existing items can be removed from the top of the stack. It supports 
 - `Pop`: Remove and return the top element of the stack, or return an error if the stack is empty.
 - `Push`: Add a new element to the top of the stack.
 - `Size`: Return the current number of elements in the stack.
+- `Serialize`: Convert a stack into a JSON-formatted string representing an array of its items.
 
 **Stack data structure use cases:**
 

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -180,5 +181,41 @@ func TestStack_Empty(t *testing.T) {
 		assert.Equal(t, 0, size)
 		assert.Nil(t, top)
 		assert.Error(t, err)
+	})
+}
+
+func TestStack_Serialize(t *testing.T) {
+	t.Run("should serialize an empty stack", func(t *testing.T) {
+		stack := NewStack[int]()
+		result, err := stack.Serialize()
+
+		assert.NoError(t, err)
+		assert.Equal(t, "[]", result)
+	})
+
+	t.Run("should serialize a stack with one item", func(t *testing.T) {
+		stack := NewStack[int]()
+		stack.Push(1)
+		result, err := stack.Serialize()
+
+		assert.NoError(t, err)
+		expected := []int{1}
+		var actual []int
+		json.Unmarshal([]byte(result), &actual)
+		assert.Equal(t, expected, actual)
+	})
+
+	t.Run("should serialize a stack with multiple items", func(t *testing.T) {
+		stack := NewStack[int]()
+		stack.Push(1)
+		stack.Push(2)
+		stack.Push(3)
+		result, err := stack.Serialize()
+
+		assert.NoError(t, err)
+		expected := []int{1, 2, 3}
+		var actual []int
+		json.Unmarshal([]byte(result), &actual)
+		assert.Equal(t, expected, actual)
 	})
 }

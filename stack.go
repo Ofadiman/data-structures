@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type Stack[T any] struct {
 	items []*T
@@ -48,4 +51,16 @@ func (r *Stack[T]) Empty() {
 
 	var emptyItems []*T
 	r.items = emptyItems
+}
+
+func (r *Stack[T]) Serialize() (string, error) {
+	if len(r.items) == 0 {
+		return "[]", nil
+	}
+
+	data, err := json.Marshal(r.items)
+	if err != nil {
+		return "", err
+	}
+	return string(data), nil
 }
