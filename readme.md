@@ -24,6 +24,7 @@ null), marking the end of the list. The following methods are supported:
 - `Insert`: Insert a new node at a specific position in the list.
 - `Remove`: Remove a node with a specific value from the list.
 - `RemoveAt`: Remove a node at a specific position in the list.
+- `Find`: Find a node with a specific value in the list.
 
 Here are some real-world use cases of Singly Linked Lists:
 

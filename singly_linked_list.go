@@ -125,3 +125,14 @@ func (r *SinglyLinkedList) RemoveAt(index int) error {
 	}
 	return nil
 }
+
+func (r *SinglyLinkedList) Find(value int) *SinglyLinkedListNode {
+	current := r.Head
+	for current != nil {
+		if current.Value == value {
+			return current
+		}
+		current = current.Next
+	}
+	return nil
+}

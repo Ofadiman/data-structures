@@ -215,3 +215,48 @@ func TestSinglyLinkedList_RemoveAt(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+func TestSinglyLinkedList_Find(t *testing.T) {
+	t.Run("should return nil when the list is empty", func(t *testing.T) {
+		list := NewSinglyLinkedList()
+
+		foundNode := list.Find(5)
+
+		assert.Nil(t, foundNode)
+	})
+
+	t.Run("should find the head when its value matches", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		foundNode := list.Find(1)
+
+		assert.NotNil(t, foundNode)
+		assert.Equal(t, 1, foundNode.Value)
+	})
+
+	t.Run("should find a middle node when its value matches", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		foundNode := list.Find(2)
+
+		assert.NotNil(t, foundNode)
+		assert.Equal(t, 2, foundNode.Value)
+	})
+
+	t.Run("should find the tail when its value matches", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		foundNode := list.Find(3)
+
+		assert.NotNil(t, foundNode)
+		assert.Equal(t, 3, foundNode.Value)
+	})
+
+	t.Run("should return nil when no node matches the value", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		foundNode := list.Find(4)
+
+		assert.Nil(t, foundNode)
+	})
+}
