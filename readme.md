@@ -19,7 +19,8 @@ A Singly Linked List is a linear data structure in which each element, called a 
 node in the sequence. The first node in the list is called the head, and the last node's reference points to nil (or
 null), marking the end of the list. The following methods are supported:
 
-- `Add` - Adds a new node with a given value to the end of the list.
+- `Add`: Adds a new node with a given value to the end of the list.
+- `Prepend`: Add a new node to the beginning of the list.
 
 Here are some real-world use cases of Singly Linked Lists:
 

@@ -53,3 +53,25 @@ func TestSinglyLinkedList_Append(t *testing.T) {
 		assert.Nil(t, tail.Next)
 	})
 }
+
+func TestSinglyLinkedList_Prepend(t *testing.T) {
+	t.Run("should prepend to an empty list", func(t *testing.T) {
+		list := NewSinglyLinkedList()
+
+		list.Prepend(1)
+
+		assert.Equal(t, 1, list.Head.Value)
+		assert.Equal(t, 1, list.Tail.Value)
+		assert.Nil(t, list.Head.Next)
+	})
+
+	t.Run("should prepend to a non-empty list", func(t *testing.T) {
+		list := NewSinglyLinkedList(2)
+
+		list.Prepend(1)
+
+		assert.Equal(t, 1, list.Head.Value)
+		assert.Equal(t, 2, list.Tail.Value)
+		assert.Equal(t, list.Head.Next, list.Tail)
+	})
+}

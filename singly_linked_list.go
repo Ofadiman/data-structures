@@ -20,14 +20,28 @@ func NewSinglyLinkedList(values ...int) *SinglyLinkedList {
 	return list
 }
 
-func (l *SinglyLinkedList) Append(value int) {
+func (r *SinglyLinkedList) Append(value int) {
 	newNode := &SinglyLinkedListNode{Value: value, Next: nil}
 
-	if l.Head == nil {
-		l.Head = newNode
-		l.Tail = newNode
+	if r.Head == nil {
+		r.Head = newNode
+		r.Tail = newNode
 	} else {
-		l.Tail.Next = newNode
-		l.Tail = newNode
+		r.Tail.Next = newNode
+		r.Tail = newNode
+	}
+}
+
+func (r *SinglyLinkedList) Prepend(value int) {
+	newNode := &SinglyLinkedListNode{
+		Value: value,
+		Next:  r.Head,
+	}
+
+	if r.Head == nil {
+		r.Head = newNode
+		r.Tail = newNode
+	} else {
+		r.Head = newNode
 	}
 }
