@@ -260,3 +260,45 @@ func TestSinglyLinkedList_Find(t *testing.T) {
 		assert.Nil(t, foundNode)
 	})
 }
+
+func TestSinglyLinkedList_IndexOf(t *testing.T) {
+	t.Run("should return -1 when the list is empty", func(t *testing.T) {
+		list := NewSinglyLinkedList()
+
+		index := list.IndexOf(5)
+
+		assert.Equal(t, -1, index)
+	})
+
+	t.Run("should find the index of the head when its value matches", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		index := list.IndexOf(1)
+
+		assert.Equal(t, 0, index)
+	})
+
+	t.Run("should find the index of a middle node when its value matches", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		index := list.IndexOf(2)
+
+		assert.Equal(t, 1, index)
+	})
+
+	t.Run("should find the index of the tail when its value matches", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		index := list.IndexOf(3)
+
+		assert.Equal(t, 2, index)
+	})
+
+	t.Run("should return -1 when no node matches the value", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		index := list.IndexOf(4)
+
+		assert.Equal(t, -1, index)
+	})
+}

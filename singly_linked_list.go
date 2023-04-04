@@ -136,3 +136,16 @@ func (r *SinglyLinkedList) Find(value int) *SinglyLinkedListNode {
 	}
 	return nil
 }
+
+func (r *SinglyLinkedList) IndexOf(value int) int {
+	current := r.Head
+	index := 0
+	for current != nil {
+		if current.Value == value {
+			return index
+		}
+		index++
+		current = current.Next
+	}
+	return -1
+}

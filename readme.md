@@ -25,6 +25,7 @@ null), marking the end of the list. The following methods are supported:
 - `Remove`: Remove a node with a specific value from the list.
 - `RemoveAt`: Remove a node at a specific position in the list.
 - `Find`: Find a node with a specific value in the list.
+- `IndexOf`: Find the index of the first occurrence of a node with a specific value.
 
 Here are some real-world use cases of Singly Linked Lists:
 
