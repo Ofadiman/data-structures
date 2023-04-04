@@ -21,6 +21,7 @@ null), marking the end of the list. The following methods are supported:
 
 - `Add`: Adds a new node with a given value to the end of the list.
 - `Prepend`: Add a new node to the beginning of the list.
+- `Insert`: Insert a new node at a specific position in the list.
 
 Here are some real-world use cases of Singly Linked Lists:
 

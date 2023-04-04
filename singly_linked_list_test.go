@@ -75,3 +75,46 @@ func TestSinglyLinkedList_Prepend(t *testing.T) {
 		assert.Equal(t, list.Head.Next, list.Tail)
 	})
 }
+
+func TestSinglyLinkedList_Insert(t *testing.T) {
+	t.Run("should insert at the beginning of the list", func(t *testing.T) {
+		list := NewSinglyLinkedList(1)
+
+		list.Insert(0, 0)
+
+		assert.Equal(t, 0, list.Head.Value)
+		assert.Equal(t, 1, list.Tail.Value)
+		assert.Equal(t, list.Head.Next, list.Tail)
+	})
+
+	t.Run("should insert at the end of the list", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2)
+
+		list.Insert(3, 2)
+
+		assert.Equal(t, 1, list.Head.Value)
+		assert.Equal(t, 3, list.Tail.Value)
+		assert.Equal(t, list.Head.Next.Next, list.Tail)
+	})
+
+	t.Run("should insert in the middle of the list", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 3)
+
+		list.Insert(2, 1)
+
+		assert.Equal(t, 1, list.Head.Value)
+		assert.Equal(t, 2, list.Head.Next.Value)
+		assert.Equal(t, 3, list.Tail.Value)
+	})
+
+	t.Run("should insert at the end when position is greater than list length", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2)
+
+		list.Insert(3, 4)
+
+		assert.Equal(t, 1, list.Head.Value)
+		assert.Equal(t, 2, list.Head.Next.Value)
+		assert.Equal(t, 3, list.Tail.Value)
+		assert.Equal(t, list.Head.Next.Next, list.Tail)
+	})
+}

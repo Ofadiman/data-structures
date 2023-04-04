@@ -45,3 +45,26 @@ func (r *SinglyLinkedList) Prepend(value int) {
 		r.Head = newNode
 	}
 }
+
+func (r *SinglyLinkedList) Insert(value int, position int) {
+	newNode := &SinglyLinkedListNode{
+		Value: value,
+	}
+
+	if position <= 0 || r.Head == nil {
+		r.Prepend(value)
+		return
+	}
+
+	current := r.Head
+	for i := 1; i < position && current.Next != nil; i++ {
+		current = current.Next
+	}
+
+	newNode.Next = current.Next
+	current.Next = newNode
+
+	if newNode.Next == nil {
+		r.Tail = newNode
+	}
+}
