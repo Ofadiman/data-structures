@@ -118,3 +118,43 @@ func TestSinglyLinkedList_Insert(t *testing.T) {
 		assert.Equal(t, list.Head.Next.Next, list.Tail)
 	})
 }
+
+func TestSinglyLinkedList_Remove(t *testing.T) {
+	t.Run("should remove the head when the value matches", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		list.Remove(1)
+
+		assert.Equal(t, 2, list.Head.Value)
+		assert.Equal(t, 3, list.Head.Next.Value)
+	})
+
+	t.Run("should remove the tail when the value matches", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		list.Remove(3)
+
+		assert.Equal(t, 1, list.Head.Value)
+		assert.Equal(t, 2, list.Head.Next.Value)
+		assert.Nil(t, list.Head.Next.Next)
+	})
+
+	t.Run("should remove a middle node when the value matches", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		list.Remove(2)
+
+		assert.Equal(t, 1, list.Head.Value)
+		assert.Equal(t, 3, list.Head.Next.Value)
+	})
+
+	t.Run("should do nothing when the value does not exist", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+
+		list.Remove(4)
+
+		assert.Equal(t, 1, list.Head.Value)
+		assert.Equal(t, 2, list.Head.Next.Value)
+		assert.Equal(t, 3, list.Head.Next.Next.Value)
+	})
+}

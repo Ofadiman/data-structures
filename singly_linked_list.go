@@ -68,3 +68,29 @@ func (r *SinglyLinkedList) Insert(value int, position int) {
 		r.Tail = newNode
 	}
 }
+
+func (r *SinglyLinkedList) Remove(value int) {
+	if r.Head == nil {
+		return
+	}
+
+	if r.Head.Value == value {
+		r.Head = r.Head.Next
+		if r.Head == nil {
+			r.Tail = nil
+		}
+		return
+	}
+
+	current := r.Head
+	for current.Next != nil {
+		if current.Next.Value == value {
+			current.Next = current.Next.Next
+			if current.Next == nil {
+				r.Tail = current
+			}
+			return
+		}
+		current = current.Next
+	}
+}
