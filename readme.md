@@ -26,8 +26,10 @@ null), marking the end of the list. The following methods are supported:
 - `RemoveAt`: Remove a node at a specific position in the list.
 - `Find`: Find a node with a specific value in the list.
 - `IndexOf`: Find the index of the first occurrence of a node with a specific value.
-- `Serialize`: Convert a singly linked list into a JSON-formatted string representing an array of nodes with their respective values.
-- `Deserialize`: Reconstruct a singly linked list from a JSON-formatted string representing an array of nodes, ensuring compatibility with the Serialize method.
+- `Serialize`: Convert a singly linked list into a JSON-formatted string representing an array of nodes with their
+  respective values.
+- `Deserialize`: Reconstruct a singly linked list from a JSON-formatted string representing an array of nodes, ensuring
+  compatibility with the Serialize method.
 
 Here are some real-world use cases of Singly Linked Lists:
 
@@ -59,6 +61,8 @@ added, and existing items can be removed from the top of the stack. It supports 
 - `Push`: Add a new element to the top of the stack.
 - `Size`: Return the current number of elements in the stack.
 - `Serialize`: Convert a stack into a JSON-formatted string representing an array of its items.
+- `Deserialize`: Reconstruct a stack of integers from a JSON-formatted string representing an array of items, ensuring
+  compatibility with the Serialize method.
 
 **Stack data structure use cases:**
 
@@ -87,12 +91,17 @@ searching, insertion, and deletion operations. Tree supports the following opera
 
 - `FindNodeByID`: Find a node in the tree by its unique ID, returning an error if the node is not found.
 - `Insert`: Insert a new child node under a parent node with the specified parent ID.
-- `Delete`: Remove a node with a specified ID from the tree, including detaching it from its parent and updating the parent's children list.
-- `ForEachNodeDepthFirst`: Perform a depth-first traversal of the tree, calling a provided callback function for each visited node.
-- `ForEachNodeBreadthFirst`: Perform a breadth-first traversal of the tree, calling a provided callback function for each visited node.
+- `Delete`: Remove a node with a specified ID from the tree, including detaching it from its parent and updating the
+  parent's children list.
+- `ForEachNodeDepthFirst`: Perform a depth-first traversal of the tree, calling a provided callback function for each
+  visited node.
+- `ForEachNodeBreadthFirst`: Perform a breadth-first traversal of the tree, calling a provided callback function for
+  each visited node.
 - `Serialize`: Convert the tree into a JSON-formatted string, including all nodes and their relationships.
-- `Deserialize`: Reconstruct a tree from a JSON-formatted string, ensuring compatibility with the Serialize method and preserving node relationships.
-- `Height`: Calculate and return the height of the tree, which is the maximum number of edges in the longest path from the root to a leaf.
+- `Deserialize`: Reconstruct a tree from a JSON-formatted string, ensuring compatibility with the Serialize method and
+  preserving node relationships.
+- `Height`: Calculate and return the height of the tree, which is the maximum number of edges in the longest path from
+  the root to a leaf.
 
 **Some important properties of trees are:**
 

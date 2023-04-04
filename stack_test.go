@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -199,10 +198,7 @@ func TestStack_Serialize(t *testing.T) {
 		result, err := stack.Serialize()
 
 		assert.NoError(t, err)
-		expected := []int{1}
-		var actual []int
-		json.Unmarshal([]byte(result), &actual)
-		assert.Equal(t, expected, actual)
+		assert.Equal(t, "[1]", result)
 	})
 
 	t.Run("should serialize a stack with multiple items", func(t *testing.T) {
@@ -213,9 +209,64 @@ func TestStack_Serialize(t *testing.T) {
 		result, err := stack.Serialize()
 
 		assert.NoError(t, err)
-		expected := []int{1, 2, 3}
-		var actual []int
-		json.Unmarshal([]byte(result), &actual)
-		assert.Equal(t, expected, actual)
+		assert.Equal(t, "[1,2,3]", result)
+	})
+}
+
+func TestStack_Deserialize(t *testing.T) {
+	t.Run("should deserialize an empty stack", func(t *testing.T) {
+		stack := NewStack[int]()
+		err := stack.Deserialize("[]")
+
+		assert.NoError(t, err)
+		assert.True(t, stack.IsEmpty())
+	})
+
+	t.Run("should deserialize a stack with one item", func(t *testing.T) {
+		stack := NewStack[int]()
+		err := stack.Deserialize(`[1]`)
+
+		assert.NoError(t, err)
+		assert.Equal(t, 1, stack.Size())
+
+		item, err := stack.Peek()
+		assert.NoError(t, err)
+		assert.Equal(t, 1, *item)
+	})
+
+	t.Run("should deserialize a stack with multiple items", func(t *testing.T) {
+		stack := NewStack[int]()
+		err := stack.Deserialize(`[1,2,3]`)
+
+		assert.NoError(t, err)
+		assert.Equal(t, 3, stack.Size())
+
+		actual, err := stack.Peek()
+		assert.NoError(t, err)
+		assert.Equal(t, 3, *actual)
+
+		stack.Pop()
+		actual, err = stack.Peek()
+		assert.NoError(t, err)
+		assert.Equal(t, 2, *actual)
+
+		stack.Pop()
+		actual, err = stack.Peek()
+		assert.NoError(t, err)
+		assert.Equal(t, 1, *actual)
+	})
+
+	t.Run("should return an error when attempting to deserialize invalid JSON", func(t *testing.T) {
+		stack := NewStack[int]()
+		err := stack.Deserialize(`{}`)
+
+		assert.Error(t, err)
+	})
+
+	t.Run("should return an error when attempting to deserialize into a nil stack", func(t *testing.T) {
+		var stack *Stack[int]
+		err := stack.Deserialize(`[1, 2, 3]`)
+
+		assert.Error(t, err)
 	})
 }

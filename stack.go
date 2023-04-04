@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 )
 
@@ -63,4 +64,24 @@ func (r *Stack[T]) Serialize() (string, error) {
 		return "", err
 	}
 	return string(data), nil
+}
+
+func (r *Stack[T]) Deserialize(data string) error {
+	if r == nil {
+		return errors.New("cannot deserialize into a nil stack")
+	}
+
+	if data == "[]" {
+		r.items = []*T{}
+		return nil
+	}
+
+	var items []*T
+	err := json.Unmarshal([]byte(data), &items)
+	if err != nil {
+		return err
+	}
+
+	r.items = items
+	return nil
 }
