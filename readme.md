@@ -27,6 +27,7 @@ null), marking the end of the list. The following methods are supported:
 - `Find`: Find a node with a specific value in the list.
 - `IndexOf`: Find the index of the first occurrence of a node with a specific value.
 - `Serialize`: Convert a singly linked list into a JSON-formatted string representing an array of nodes with their respective values.
+- `Deserialize`: Reconstruct a singly linked list from a JSON-formatted string representing an array of nodes, ensuring compatibility with the Serialize method.
 
 Here are some real-world use cases of Singly Linked Lists:
 

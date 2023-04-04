@@ -188,3 +188,18 @@ func (r *SinglyLinkedList) Serialize() (string, error) {
 
 	return string(jsonData), nil
 }
+
+func (r *SinglyLinkedList) Deserialize(serialized string) error {
+	var nodes []JsonNode
+
+	if err := json.Unmarshal([]byte(serialized), &nodes); err != nil {
+		return err
+	}
+
+	r.Head = nil
+	for _, node := range nodes {
+		r.Append(node.Value)
+	}
+
+	return nil
+}

@@ -353,3 +353,25 @@ func TestSinglyLinkedList_Serialize(t *testing.T) {
 		assert.Equal(t, "[{\"value\":1},{\"value\":2},{\"value\":3}]", serializedList)
 	})
 }
+
+func TestSinglyLinkedList_Deserialize(t *testing.T) {
+	t.Run("should deserialize an empty list", func(t *testing.T) {
+		list := NewSinglyLinkedList()
+		err := list.Deserialize("[]")
+
+		assert.Nil(t, err)
+		assert.Nil(t, list.Head)
+		assert.Nil(t, list.Tail)
+	})
+
+	t.Run("should deserialize a list with multiple nodes", func(t *testing.T) {
+		list := NewSinglyLinkedList()
+		err := list.Deserialize(`[{"value":1},{"value":2},{"value":3}]`)
+		assert.Nil(t, err)
+
+		assert.Equal(t, 1, list.Head.Value)
+		assert.Equal(t, 2, list.Head.Next.Value)
+		assert.Equal(t, 3, list.Head.Next.Next.Value)
+		assert.Equal(t, 3, list.Tail.Value)
+	})
+}
