@@ -19,7 +19,7 @@ A Singly Linked List is a linear data structure in which each element, called a 
 node in the sequence. The first node in the list is called the head, and the last node's reference points to nil (or
 null), marking the end of the list. The following methods are supported:
 
-- `Add`: Adds a new node with a given value to the end of the list.
+- `Add`: Add a new node with a given value to the end of the list.
 - `Prepend`: Add a new node to the beginning of the list.
 - `Insert`: Insert a new node at a specific position in the list.
 - `Remove`: Remove a node with a specific value from the list.
@@ -52,12 +52,12 @@ A stack is a linear data structure that follows the Last In, First Out (LIFO) pr
 added to the stack is the first one to be removed. It can be thought of as a collection of items, where new items can be
 added, and existing items can be removed from the top of the stack. It supports the following operations:
 
-- `Empty` - This operation clears all items from the stack.
-- `IsEmpty` - This operation returns true if the stack does not have any items.
-- `Peek` - This operation returns the top element of the stack without removing it.
-- `Pop` - This operation removes the top element from the stack.
-- `Push` - This operation adds an element to the stack.
-- `Size` - This operation return the information about current number of items in the stack.
+- `Empty`: Remove all elements from the stack.
+- `IsEmpty`: Check if the stack is empty, returning true if empty and false otherwise.
+- `Peek`: Return the top element of the stack without removing it, or return an error if the stack is empty.
+- `Pop`: Remove and return the top element of the stack, or return an error if the stack is empty.
+- `Push`: Add a new element to the top of the stack.
+- `Size`: Return the current number of elements in the stack.
 
 **Stack data structure use cases:**
 
@@ -84,16 +84,14 @@ in the tree has a parent node and zero or more child nodes. The top node of the 
 with no children are called leaves. Trees are used to represent hierarchical relationships and to enable efficient
 searching, insertion, and deletion operations. Tree supports the following operations:
 
-- `FindNodeByID` - This operation searches the whole tree for a node with given ID.
-- `Insert` - This operation inserts a node in the `children` list of the node with given ID.
-- `Delete` - This operation deletes a node with given ID.
-- `ForEachNodeDepthFirst` - This operation executes provided callback function for each node of the tree in depth-first
-  manner.
-- `ForEachNodeBreadthFirst` - This operation executes provided callback function for each node of the tree in
-  breadth-first manner.
-- `Serialize` - This operation serializes the tree into JSON object.
-- `Deserialize` - This operation restores the tree from JSON object.
-- `Height` - This operation returns the current height of the tree.
+- `FindNodeByID`: Find a node in the tree by its unique ID, returning an error if the node is not found.
+- `Insert`: Insert a new child node under a parent node with the specified parent ID.
+- `Delete`: Remove a node with a specified ID from the tree, including detaching it from its parent and updating the parent's children list.
+- `ForEachNodeDepthFirst`: Perform a depth-first traversal of the tree, calling a provided callback function for each visited node.
+- `ForEachNodeBreadthFirst`: Perform a breadth-first traversal of the tree, calling a provided callback function for each visited node.
+- `Serialize`: Convert the tree into a JSON-formatted string, including all nodes and their relationships.
+- `Deserialize`: Reconstruct a tree from a JSON-formatted string, ensuring compatibility with the Serialize method and preserving node relationships.
+- `Height`: Calculate and return the height of the tree, which is the maximum number of edges in the longest path from the root to a leaf.
 
 **Some important properties of trees are:**
 
