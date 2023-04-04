@@ -8,8 +8,8 @@ include `arrays`, `linked lists`, `stacks`, `queues`, `trees`, `graphs`, and `ha
 
 Implemented data structures:
 
-- [Singly Linked List](singly_linked_list.go)
 - [Binary Tree](binary_tree.go)
+- [Singly Linked List](singly_linked_list.go)
 - [Stack](stack.go)
 - [Tree](tree.go)
 
@@ -17,7 +17,7 @@ Implemented data structures:
 
 A stack is a linear data structure that follows the Last In, First Out (LIFO) principle, meaning that the last element
 added to the stack is the first one to be removed. It can be thought of as a collection of items, where new items can be
-added, and existing items can be removed from the top of the stack. It supports three primary operations:
+added, and existing items can be removed from the top of the stack. It supports the following operations:
 
 - `Empty` - This operation clears all items from the stack.
 - `IsEmpty` - This operation returns true if the stack does not have any items.
@@ -49,7 +49,16 @@ added, and existing items can be removed from the top of the stack. It supports 
 A tree data structure is a non-linear hierarchical data structure that consists of nodes connected by edges. Each node
 in the tree has a parent node and zero or more child nodes. The top node of the tree is called the root, and the nodes
 with no children are called leaves. Trees are used to represent hierarchical relationships and to enable efficient
-searching, insertion, and deletion operations.
+searching, insertion, and deletion operations. Tree supports the following operations:
+
+- `FindNodeByID` - This operation searches the whole tree for a node with given ID.
+- `Insert` - This operation inserts a node in the `children` list of the node with given ID.
+- `Delete` - This operation deletes a node with given ID.
+- `ForEachNodeDepthFirst` - This operation executes provided callback function for each node of the tree in depth-first manner.
+- `ForEachNodeBreadthFirst` - This operation executes provided callback function for each node of the tree in breadth-first manner.
+- `Serialize` - This operation serializes the tree into JSON object.
+- `Deserialize` - This operation restores the tree from JSON object.
+- `Height` - This operation returns the current height of the tree.
 
 **Some important properties of trees are:**
 
