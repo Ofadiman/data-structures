@@ -1,6 +1,9 @@
 package main
 
-import "errors"
+import (
+	"encoding/json"
+	"errors"
+)
 
 type SinglyLinkedListNode struct {
 	Value int
@@ -163,4 +166,25 @@ func (r *SinglyLinkedList) Reverse() {
 	}
 
 	r.Head = prev
+}
+
+type JsonNode struct {
+	Value int `json:"value"`
+}
+
+func (r *SinglyLinkedList) Serialize() (string, error) {
+	nodes := make([]JsonNode, 0)
+
+	current := r.Head
+	for current != nil {
+		nodes = append(nodes, JsonNode{Value: current.Value})
+		current = current.Next
+	}
+
+	jsonData, err := json.Marshal(nodes)
+	if err != nil {
+		return "", err
+	}
+
+	return string(jsonData), nil
 }

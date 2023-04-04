@@ -335,3 +335,21 @@ func TestSinglyLinkedList_Reverse(t *testing.T) {
 		assert.Nil(t, list.Head.Next.Next.Next)
 	})
 }
+
+func TestSinglyLinkedList_Serialize(t *testing.T) {
+	t.Run("should serialize an empty list", func(t *testing.T) {
+		list := NewSinglyLinkedList()
+		serializedList, err := list.Serialize()
+
+		assert.NoError(t, err)
+		assert.Equal(t, "[]", serializedList)
+	})
+
+	t.Run("should serialize a list with multiple nodes", func(t *testing.T) {
+		list := NewSinglyLinkedList(1, 2, 3)
+		serializedList, err := list.Serialize()
+
+		assert.NoError(t, err)
+		assert.Equal(t, "[{\"value\":1},{\"value\":2},{\"value\":3}]", serializedList)
+	})
+}
