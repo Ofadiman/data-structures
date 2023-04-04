@@ -13,6 +13,31 @@ Implemented data structures:
 - [Stack](stack.go)
 - [Tree](tree.go)
 
+# Singly Linked List
+
+A Singly Linked List is a linear data structure in which each element, called a node, contains a reference to the next
+node in the sequence. The first node in the list is called the head, and the last node's reference points to nil (or
+null), marking the end of the list. The following methods are supported:
+
+- `Add` - Adds a new node with a given value to the end of the list.
+
+Here are some real-world use cases of Singly Linked Lists:
+
+1. `Undo/Redo functionality`: Singly Linked Lists can be used to implement undo and redo functionality in applications
+   like text editors, image editors, or web browsers. Each action performed by the user can be stored as a node in the
+   list, and traversing the list in reverse order can undo the actions.
+2. `Dynamic memory allocation`: Singly Linked Lists can be used to manage memory allocation in operating systems. Free
+   blocks of memory can be stored as nodes in a linked list, making it easier to allocate and deallocate memory as
+   needed.
+3. `Implementing data structures`: Singly Linked Lists can be used as a building block for more complex data structures
+   like Stacks, Queues, or Symbol Tables.
+4. `Representing sparse data`: In situations where data is sparse, Singly Linked Lists can be used to store non-zero
+   elements efficiently.
+5. `Implementing navigation systems`: In navigation systems, waypoints can be stored in a Singly Linked List to
+   represent a route or path. The list can be traversed from the head to the tail to follow the route.
+6. `Music playlist`: A music player can use a Singly Linked List to represent a playlist, where each node represents a
+   song. This allows for easy insertion and deletion of songs in the playlist.
+
 # Stack
 
 A stack is a linear data structure that follows the Last In, First Out (LIFO) principle, meaning that the last element
@@ -54,8 +79,10 @@ searching, insertion, and deletion operations. Tree supports the following opera
 - `FindNodeByID` - This operation searches the whole tree for a node with given ID.
 - `Insert` - This operation inserts a node in the `children` list of the node with given ID.
 - `Delete` - This operation deletes a node with given ID.
-- `ForEachNodeDepthFirst` - This operation executes provided callback function for each node of the tree in depth-first manner.
-- `ForEachNodeBreadthFirst` - This operation executes provided callback function for each node of the tree in breadth-first manner.
+- `ForEachNodeDepthFirst` - This operation executes provided callback function for each node of the tree in depth-first
+  manner.
+- `ForEachNodeBreadthFirst` - This operation executes provided callback function for each node of the tree in
+  breadth-first manner.
 - `Serialize` - This operation serializes the tree into JSON object.
 - `Deserialize` - This operation restores the tree from JSON object.
 - `Height` - This operation returns the current height of the tree.
