@@ -71,3 +71,42 @@ func TestBinarySearchTree_Search(t *testing.T) {
 		assert.Nil(t, tree.Search(5))
 	})
 }
+
+func TestBinarySearchTree_Delete(t *testing.T) {
+	t.Run("should not panic when deleting from an empty tree", func(t *testing.T) {
+		tree := NewBinarySearchTree()
+
+		assert.NotPanics(t, func() { tree.Delete(5) })
+	})
+
+	t.Run("should delete a leaf node", func(t *testing.T) {
+		tree := NewBinarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13)
+
+		tree.Delete(1)
+		assert.Nil(t, tree.Search(1))
+	})
+
+	t.Run("should delete a node with one child", func(t *testing.T) {
+		tree := NewBinarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13)
+
+		tree.Delete(14)
+		assert.Nil(t, tree.Search(14))
+		assert.Equal(t, 13, tree.Root.Right.Right.Value)
+	})
+
+	t.Run("should delete a node with two children", func(t *testing.T) {
+		tree := NewBinarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13)
+
+		tree.Delete(3)
+		assert.Nil(t, tree.Search(3))
+		assert.Equal(t, 4, tree.Root.Left.Value)
+	})
+
+	t.Run("should delete the root node", func(t *testing.T) {
+		tree := NewBinarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13)
+
+		tree.Delete(8)
+		assert.Nil(t, tree.Search(8))
+		assert.Equal(t, 10, tree.Root.Value)
+	})
+}

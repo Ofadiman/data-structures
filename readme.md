@@ -22,6 +22,7 @@ entire tree, making it efficient for searching, inserting, and deleting values. 
 
 - `Insert`: Insert a new node with a given value into the tree.
 - `Search`: Search for a node with a specific value in the tree.
+- `Delete`: Remove a node with a specific value from the tree.
 
 Here are some real-world use cases of Binary Search Trees:
 
