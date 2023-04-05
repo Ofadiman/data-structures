@@ -21,6 +21,7 @@ node to the right is greater than or equal to the value of the parent node. This
 entire tree, making it efficient for searching, inserting, and deleting values. The following methods are supported:
 
 - `Insert`: Insert a new node with a given value into the tree.
+- `Search`: Search for a node with a specific value in the tree.
 
 Here are some real-world use cases of Binary Search Trees:
 

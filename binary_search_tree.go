@@ -47,3 +47,19 @@ func insertNode(currentNode, newNode *BinarySearchTreeNode) {
 		}
 	}
 }
+
+func (r *BinarySearchTree) Search(value int) *BinarySearchTreeNode {
+	return searchNode(r.Root, value)
+}
+
+func searchNode(currentNode *BinarySearchTreeNode, value int) *BinarySearchTreeNode {
+	if currentNode == nil || currentNode.Value == value {
+		return currentNode
+	}
+
+	if value < currentNode.Value {
+		return searchNode(currentNode.Left, value)
+	} else {
+		return searchNode(currentNode.Right, value)
+	}
+}
