@@ -23,6 +23,7 @@ entire tree, making it efficient for searching, inserting, and deleting values. 
 - `Insert`: Insert a new node with a given value into the tree.
 - `Search`: Search for a node with a specific value in the tree.
 - `Delete`: Remove a node with a specific value from the tree.
+- `InOrderTraversal`: Traverse the tree in in-order (left, root, right) and apply a given function to each node.
 
 Here are some real-world use cases of Binary Search Trees:
 

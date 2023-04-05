@@ -78,14 +78,12 @@ func deleteNode(currentNode *BinarySearchTreeNode, value int) *BinarySearchTreeN
 	} else if value > currentNode.Value {
 		currentNode.Right = deleteNode(currentNode.Right, value)
 	} else {
-		// Case 1: Node with only one child or no children
 		if currentNode.Left == nil {
 			return currentNode.Right
 		} else if currentNode.Right == nil {
 			return currentNode.Left
 		}
 
-		// Case 2: Node with two children
 		currentNode.Value = minValue(currentNode.Right)
 		currentNode.Right = deleteNode(currentNode.Right, currentNode.Value)
 	}
@@ -99,4 +97,18 @@ func minValue(node *BinarySearchTreeNode) int {
 		minValue = node.Value
 	}
 	return minValue
+}
+
+func (r *BinarySearchTree) InOrderTraversal(callback func(node *BinarySearchTreeNode)) {
+	inOrderTraversal(r.Root, callback)
+}
+
+func inOrderTraversal(node *BinarySearchTreeNode, callback func(node *BinarySearchTreeNode)) {
+	if node == nil {
+		return
+	}
+
+	inOrderTraversal(node.Left, callback)
+	callback(node)
+	inOrderTraversal(node.Right, callback)
 }

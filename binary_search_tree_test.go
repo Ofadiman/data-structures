@@ -110,3 +110,14 @@ func TestBinarySearchTree_Delete(t *testing.T) {
 		assert.Equal(t, 10, tree.Root.Value)
 	})
 }
+
+func TestBinarySearchTree_InOrderTraversalWithCallback(t *testing.T) {
+	tree := NewBinarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13)
+	expectedOrder := []int{1, 3, 4, 6, 7, 8, 10, 13, 14}
+	orderIndex := 0
+
+	tree.InOrderTraversal(func(node *BinarySearchTreeNode) {
+		assert.Equal(t, expectedOrder[orderIndex], node.Value)
+		orderIndex++
+	})
+}
