@@ -8,10 +8,34 @@ include `arrays`, `linked lists`, `stacks`, `queues`, `trees`, `graphs`, and `ha
 
 Implemented data structures:
 
-- [Binary Tree](binary_tree.go)
+- [Binary Search Tree](binary_search_tree.go)
 - [Singly Linked List](singly_linked_list.go)
 - [Stack](stack.go)
 - [Tree](tree.go)
+
+# Binary Search Tree
+
+A Binary Search Tree (BST) is a binary tree data structure in which each node has at most two children, arranged in such
+a way that the value of the node to the left is less than or equal to the value of the parent node, and the value of the
+node to the right is greater than or equal to the value of the parent node. This property is maintained throughout the
+entire tree, making it efficient for searching, inserting, and deleting values. The following methods are supported:
+
+- `Insert`: Insert a new node with a given value into the tree.
+
+Here are some real-world use cases of Binary Search Trees:
+
+- `Databases`: BSTs are commonly used in databases for indexing purposes, making it efficient to search, insert, and
+  delete records based on a certain key value.
+- `Symbol Tables`: In compilers, BSTs can be used to store and manage the symbol table, which keeps track of variable
+  and function names during compilation.
+- `Autocomplete functionality`: BSTs can be used to efficiently store and search a dictionary of words for implementing
+  autocomplete functionality in text editors or search engines.
+- `Balanced Partitions`: BSTs can be used to balance partitions in distributed systems, such as partitioning users based
+  on their IDs, ensuring an evenly distributed load across the system.
+- `Game Trees`: In game theory and artificial intelligence, BSTs can be used to represent and explore possible game
+  states in a minimax algorithm, allowing for efficient pruning of non-optimal branches.
+- `File Systems`: File systems can use BSTs to store and manage directory structures and file metadata, making it
+  efficient to search, insert, and delete files and directories.
 
 # Singly Linked List
 
