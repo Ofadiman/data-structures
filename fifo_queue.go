@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 type FIFOQueueItem struct {
 	ID    string
 	Value int64
@@ -15,4 +17,15 @@ func NewFIFOQueue() *FIFOQueue {
 
 func (r *FIFOQueue) Enqueue(item FIFOQueueItem) {
 	r.items = append(r.items, item)
+}
+
+func (r *FIFOQueue) Dequeue() (FIFOQueueItem, error) {
+	if len(r.items) == 0 {
+		return FIFOQueueItem{}, errors.New("queue is empty")
+	}
+
+	item := r.items[0]
+	r.items = r.items[1:]
+
+	return item, nil
 }
