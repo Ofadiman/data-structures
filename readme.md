@@ -12,6 +12,7 @@ Implemented data structures:
 - [Singly Linked List](singly_linked_list.go)
 - [Stack](stack.go)
 - [Tree](tree.go)
+- [FIFO Queue](fifo_queue.go)
 
 # Binary Search Tree
 
@@ -160,6 +161,32 @@ searching, insertion, and deletion operations. Tree supports the following opera
    dictionary implementations.
 10. `Taxonomies`: Trees are used to represent the hierarchical classification of objects, such as biological species or
     product categories in e-commerce websites.
+
+# FIFO Queue
+
+A First-In-First-Out (FIFO) Queue is a linear data structure that follows the First-In-First-Out order, meaning the
+first element added to the queue will be the first one to be removed. It operates on a principle similar to real-life
+queues, like waiting in line at a grocery store checkout. Elements are added (enqueued) at the rear (also called tail)
+and removed (dequeued) from the front (also called head) of the queue. The following methods are supported:
+
+- `Enqueue`: Add an element to the end of the queue.
+- `Dequeue`: Remove and return the element from the front of the queue. If the queue is empty, return an appropriate
+  error or nil value.
+- `Front`: Return the element at the front of the queue without removing it. If the queue is empty, return an
+  appropriate error or nil value.
+- `IsEmpty`: Check if the queue is empty.
+- `Size`: Return the number of elements in the queue.
+
+Here are some real-world use cases of FIFO Queues:
+
+1. `Task scheduling`: Operating systems use queues to maintain a list of processes waiting for their turn to execute.
+   New processes are enqueued at the rear, and the process at the front is dequeued for execution.
+2. `Buffering`: Queues are used to buffer data in applications like video streaming, where data packets are enqueued as
+   they arrive and dequeued for playback in the correct order.
+3. `Event handling`: In event-driven programming, queues can be used to manage a list of events waiting to be processed.
+   Events are enqueued as they occur and dequeued in order for processing by event handlers.
+4. `Message queues`: In distributed systems, message queues are used to store messages between components or services,
+   ensuring that they are processed in the order they are received.
 
 # Running tests
 
