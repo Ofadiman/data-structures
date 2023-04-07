@@ -41,3 +41,7 @@ func (r *FIFOQueue) Front() (FIFOQueueItem, error) {
 func (r *FIFOQueue) Size() int {
 	return len(r.items)
 }
+
+func (r *FIFOQueue) IsEmpty() bool {
+	return len(r.items) == 0
+}

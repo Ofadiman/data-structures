@@ -101,3 +101,19 @@ func TestFIFOQueue_Size(t *testing.T) {
 		assert.Equal(t, 2, queue.Size())
 	})
 }
+
+func TestFIFOQueue_IsEmpty(t *testing.T) {
+	t.Run("should return true when the queue is empty", func(t *testing.T) {
+		queue := NewFIFOQueue()
+
+		assert.True(t, queue.IsEmpty())
+	})
+
+	t.Run("should return false when the queue is not empty", func(t *testing.T) {
+		queue := NewFIFOQueue()
+
+		queue.Enqueue(FIFOQueueItem{ID: "item1", Value: 1})
+
+		assert.False(t, queue.IsEmpty())
+	})
+}
