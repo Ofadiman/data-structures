@@ -29,3 +29,11 @@ func (r *FIFOQueue) Dequeue() (FIFOQueueItem, error) {
 
 	return item, nil
 }
+
+func (r *FIFOQueue) Front() (FIFOQueueItem, error) {
+	if len(r.items) == 0 {
+		return FIFOQueueItem{}, errors.New("queue is empty")
+	}
+
+	return r.items[0], nil
+}

@@ -55,3 +55,31 @@ func TestFIFOQueue_Dequeue(t *testing.T) {
 		assert.Equal(t, "queue is empty", err.Error())
 	})
 }
+
+func TestFIFOQueue_Front(t *testing.T) {
+	t.Run("should return the front item without dequeuing it", func(t *testing.T) {
+		queue := NewFIFOQueue()
+
+		queue.Enqueue(FIFOQueueItem{ID: "item1", Value: 1})
+		queue.Enqueue(FIFOQueueItem{ID: "item2", Value: 2})
+		queue.Enqueue(FIFOQueueItem{ID: "item3", Value: 3})
+
+		item, err := queue.Front()
+		require.NoError(t, err)
+		assert.Equal(t, "item1", item.ID)
+		assert.Equal(t, int64(1), item.Value)
+
+		item, err = queue.Front()
+		require.NoError(t, err)
+		assert.Equal(t, "item1", item.ID)
+		assert.Equal(t, int64(1), item.Value)
+	})
+
+	t.Run("should return an error when getting the front item from an empty queue", func(t *testing.T) {
+		queue := NewFIFOQueue()
+
+		_, err := queue.Front()
+		assert.Error(t, err)
+		assert.Equal(t, "queue is empty", err.Error())
+	})
+}
