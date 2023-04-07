@@ -83,3 +83,21 @@ func TestFIFOQueue_Front(t *testing.T) {
 		assert.Equal(t, "queue is empty", err.Error())
 	})
 }
+
+func TestFIFOQueue_Size(t *testing.T) {
+	t.Run("should return the correct size of the queue", func(t *testing.T) {
+		queue := NewFIFOQueue()
+
+		assert.Equal(t, 0, queue.Size())
+
+		queue.Enqueue(FIFOQueueItem{ID: "item1", Value: 1})
+		queue.Enqueue(FIFOQueueItem{ID: "item2", Value: 2})
+		queue.Enqueue(FIFOQueueItem{ID: "item3", Value: 3})
+
+		assert.Equal(t, 3, queue.Size())
+
+		_, _ = queue.Dequeue()
+
+		assert.Equal(t, 2, queue.Size())
+	})
+}

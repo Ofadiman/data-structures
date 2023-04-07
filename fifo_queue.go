@@ -37,3 +37,7 @@ func (r *FIFOQueue) Front() (FIFOQueueItem, error) {
 
 	return r.items[0], nil
 }
+
+func (r *FIFOQueue) Size() int {
+	return len(r.items)
+}
